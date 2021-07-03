@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from './auth.service';
+import { User } from './_models/user';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-material-tutorial';
+  user: User;
+
+  constructor(private accountService: AccountService) {
+    this.accountService.user.subscribe(x => this.user = x);
+}
+
+logout() {
+    this.accountService.logout();
+}
+
+
 }
